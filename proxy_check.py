@@ -5,7 +5,6 @@ import requests
 import math
 import socket
 from struct import pack
-import sys
 
 timeout = 3
 good_list = []
