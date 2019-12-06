@@ -1,6 +1,5 @@
 # Proxy Check
-> Python proxy checker that takes a list of proxies and verifies they are reachable, and functioning as
-> expected. Proxy Check is able to check HTTP/HTTPS and SOCKS4/5 Proxies.
+Python proxy checker that takes a list of proxies and verifies they are reachable, and functioning as expected. Proxy Check is able to check HTTP/HTTPS and SOCKS4/5 Proxies.
 
 ## Contributing
 
