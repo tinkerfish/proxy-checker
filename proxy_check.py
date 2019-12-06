@@ -44,7 +44,7 @@ def is_socks4(host, port, soc):
     return True
 
 
-def is_socks5(host, port, soc):
+def is_socks5(soc):
     soc.sendall(b"\x05\x01\x00")
     data = soc.recv(2)
     if len(data) < 2:
@@ -82,7 +82,7 @@ def test_socks(proxy_list, thread_number):
                 print(f"[Thread: {thread_number}] Current IP: {ip}")
                 print(f"[Thread: {thread_number}] Proxy Works: True")
                 working_list.append(item)
-            elif is_socks5(ip, port, s):
+            elif is_socks5(s):
                 s.close()
                 print(f"[Thread: {thread_number}] Current IP: {ip}")
                 print(f"[Thread: {thread_number}] Proxy Works: True")
@@ -128,8 +128,9 @@ def verify_proxy(proxy_list, thread_number):
 
 def get_proxies(file):
     proxy_list = []
-    for item in open(file, "r+").readlines():
-        proxy_list.append(item.strip())
+    with open(file, "r+") as f:
+        for item in f.readlines():
+            proxy_list.append(item.strip())
     return proxy_list
 
 
@@ -164,7 +165,9 @@ def main(threads):
 
     print(f"Working Proxies: {good_list}")
 
-    with open("good_proxies.txt", "w") as f:
+    filename = args.output_file if args.output_file else "good_proxies.txt"
+
+    with open(filename, "w") as f:
         for i in good_list:
             f.write(i + "\n")
 
